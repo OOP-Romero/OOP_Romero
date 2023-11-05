@@ -1,0 +1,148 @@
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private String course;
+    private double averageGrade;
+
+    public Student(String name, String course, double averageGrade) {
+        this.name = name;
+        this.course = course;
+        this.averageGrade = averageGrade;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public double getAverageGrade() {
+        return averageGrade;
+    }
+
+    public void editStudentInfo(String name, String course, double averageGrade) {
+        this.name = name;
+        this.course = course;
+        this.averageGrade = averageGrade;
+    }
+
+    public String toString() {
+        return "Name: " + name + ", Course: " + course + ", Average Grade: " + averageGrade;
+    }
+}
+
+public class StudentInfo {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Student[] students = new Student[10];
+        int studentCount = 0;
+
+        while (true) {
+            System.out.println("---------------------------------------");
+            System.out.println("Menu:");
+            System.out.println("---------------------------------------");
+            System.out.println("1. Add Student");
+            System.out.println("2. Edit Student");
+            System.out.println("3. View All Students");
+            System.out.println("4. Delete Student");
+            System.out.println("5. Exit");
+            System.out.println("---------------------------------------");
+            System.out.print("Enter your choice: ");
+            int choice = scan.nextInt();
+
+            switch (choice) {
+                case 1:
+                    if (studentCount < 3) {
+                        System.out.println("---------------------------------------");
+                        System.out.print("Enter student name: ");
+                        scan.nextLine(); 
+                        String name = scan.nextLine();
+                        System.out.print("Enter student course: ");
+                        String course = scan.nextLine();
+                        System.out.print("Enter average grade: ");
+                        double averageGrade = scan.nextDouble();
+
+                        students[studentCount] = new Student(name, course, averageGrade);
+                        studentCount++;
+                        System.out.println("---------------------------------------");
+                        System.out.println("Student " + studentCount + " added successfully.");
+                    } else {
+                        System.out.println("---------------------------------------");
+                        System.out.println("Maximum student limit reached.");
+                    }
+                    break;
+                case 2:
+                    if (studentCount > 0) {
+                        System.out.println("---------------------------------------");
+                        System.out.print("Enter student number to edit (1-" + studentCount + "): ");
+                        int studentNumber = scan.nextInt();
+                        if (studentNumber >= 1 && studentNumber <= studentCount) {
+                            System.out.println("---------------------------------------");
+                            System.out.print("Enter student name: ");
+                            scan.nextLine(); 
+                            String name = scan.nextLine();
+                            System.out.print("Enter student course: ");
+                            String course = scan.nextLine();
+                            System.out.print("Enter average grade: ");
+                            double averageGrade = scan.nextDouble();
+
+                            students[studentNumber - 1].editStudentInfo(name, course, averageGrade);
+                            System.out.println("---------------------------------------");
+                            System.out.println("Student information updated.");
+                        } else {
+                            System.out.println("---------------------------------------");
+                            System.out.println("Invalid student number.");
+                        }
+                    } else {
+                        System.out.println("---------------------------------------");
+                        System.out.println("No students to edit.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("---------------------------------------");
+                    System.out.println("All Students:");
+                    System.out.println("---------------------------------------");
+                    for (int i = 0; i < studentCount; i++) {
+                        System.out.println("Student " + (i + 1) + ": " + students[i]);
+                    }
+                        if(0 == studentCount){ 
+                            System.out.println("No students to view");
+                    }
+                    break;
+                case 4:
+                    if (studentCount > 0) {
+                        System.out.println("---------------------------------------");
+                        System.out.print("Enter student number to delete (1-" + studentCount + "): ");
+                        int deleteStudentNumber = scan.nextInt();
+                        if (deleteStudentNumber >= 1 && deleteStudentNumber <= studentCount) {
+                            for (int i = deleteStudentNumber; i < studentCount; i++) {
+                                students[i - 1] = students[i];
+                            }
+                            students[studentCount - 1] = null;
+                            studentCount--;
+                            System.out.println("---------------------------------------");
+                            System.out.println("Student " + deleteStudentNumber + " deleted.");
+                        } else {
+                            System.out.println("---------------------------------------");
+                            System.out.println("Invalid student number.");
+                        }
+                    } else {
+                        System.out.println("---------------------------------------");
+                        System.out.println("No students to delete.");
+                    }
+                    break;
+                case 5:
+                    System.out.println("---------------------------------------");
+                    System.out.println("Exiting the program.");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("---------------------------------------");
+                    System.out.println("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+}
