@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace AccountRegistration
+{
+    internal class StudentInfoClass
+    {
+        public delegate long DelegateNumber(long number);
+        public delegate string DelegateText(string txt);
+        public static string FirstName = "";
+        public static string LastName = "";
+        public static string MiddleName = "";
+        public static string Address = "";
+        public static string Program = "";
+        public static long Age = 0;
+        public static long ContactNo = 0;
+        public static long StudentNo = 0;
+        public static string GetFirstName(string firstName) => FirstName;
+        public static string GetLastName(string lastName) => LastName;
+        public static string GetMiddleName(string middleName) => MiddleName;
+        public static string GetAddress(string address) => Address;
+        public static string GetProgram(string program) => Program;
+        public static long GetAge(long age) => Age;
+        public static long GetContactNo(long contactNo) => ContactNo;
+        public static long GetStudentNo(long studentNo) => StudentNo;
+    }
+}
