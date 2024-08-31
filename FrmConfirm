@@ -1,0 +1,51 @@
+using AccountRegistration;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Account_Registration
+{
+    public partial class FrmConfirm : Form
+    {
+        private StudentInfoClass.DelegateText DelProgram, DelLastName, DelFirstName, DelMiddleName, DelAddress;
+        private StudentInfoClass.DelegateNumber DelAge, DelContactNo, DelStudNo;
+        public FrmConfirm()
+        {
+            InitializeComponent();
+            DelProgram = new StudentInfoClass.DelegateText(StudentInfoClass.GetProgram);
+            DelLastName = new StudentInfoClass.DelegateText(StudentInfoClass.GetLastName);
+            DelMiddleName = new StudentInfoClass.DelegateText(StudentInfoClass.GetMiddleName);
+            DelFirstName = new StudentInfoClass.DelegateText(StudentInfoClass.GetFirstName);
+            DelAge = new StudentInfoClass.DelegateNumber(StudentInfoClass.GetAge);
+            DelAddress = new StudentInfoClass.DelegateText(StudentInfoClass.GetAddress);
+            DelContactNo = new StudentInfoClass.DelegateNumber(StudentInfoClass.GetContactNo);
+            DelStudNo = new StudentInfoClass.DelegateNumber(StudentInfoClass.GetStudentNo);
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        private void FrmConfirm_Load(object sender, EventArgs e) {
+        
+            Programlbl.Text = DelProgram(StudentInfoClass.Program);
+            LastNamelbl.Text = DelLastName(StudentInfoClass.LastName);
+            MiddleNamelbl.Text = DelMiddleName(StudentInfoClass.MiddleName);
+            FirstNamelbl.Text= DelFirstName(StudentInfoClass.FirstName);    
+            Agelbl.Text = DelAge(StudentInfoClass.Age).ToString();
+            Adresslbl.Text=DelAddress(StudentInfoClass.Address);
+            ContactNolbl.Text=DelAge(StudentInfoClass.ContactNo).ToString();
+            StudentNolbl.Text=DelStudNo(StudentInfoClass.StudentNo).ToString();
+
+
+        }
+
+    }
+}
