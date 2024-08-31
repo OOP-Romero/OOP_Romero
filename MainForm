@@ -1,0 +1,48 @@
+using AccountRegistration;
+
+namespace Account_Registration
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            StudentInfoClass.FirstName = FirstNamebox.Text;
+            StudentInfoClass.LastName = LastNamebox.Text;
+            StudentInfoClass.MiddleName = MiddleNamebox.Text;
+            StudentInfoClass.Address = Addressbox.Text;
+            StudentInfoClass.Program = Programbox.Text;
+            StudentInfoClass.Age = long.Parse(Agebox.Text);
+            StudentInfoClass.ContactNo = long.Parse(ContactNobox.Text);
+            StudentInfoClass.StudentNo = long.Parse(StudentNobox.Text);
+
+            FrmConfirm confirmForm = new FrmConfirm();
+            if (confirmForm.ShowDialog() == DialogResult.OK)
+            {
+                FirstNamebox.Clear();
+                LastNamebox.Clear();
+                MiddleNamebox.Clear();
+                Addressbox.Clear();
+                Agebox.Clear();
+                ContactNobox.Clear();
+                StudentNobox.Clear();
+                Programbox.SelectedIndex = -1;
+            }
+
+        }
+
+        private void Programbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Addressbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
