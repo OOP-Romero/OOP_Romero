@@ -1,0 +1,55 @@
+using System;
+using System.Windows.Forms;
+
+public partial class FrmCalculator : Form
+{
+    private CalculatorClass cal;
+    private double num1, num2;
+
+    public FrmCalculator()
+    {
+        InitializeComponent();
+        cal = new CalculatorClass();
+    }
+
+    private void btnEqual_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            num1 = Convert.ToDouble(txtBoxInput1.Text);
+            num2 = Convert.ToDouble(txtBoxInput2.Text);
+            string operation = cbOperator.SelectedItem.ToString();
+
+            switch (operation)
+            {
+                case "+":
+                    cal.OnCalculateEvent(cal.GetSum);
+                    lblDisplayTotal.Text = cal.GetSum(num1, num2).ToString();
+                    cal.RemoveCalculateEvent(cal.GetSum);
+                    break;
+                case "-":
+                    cal.OnCalculateEvent(cal.GetDifference);
+                    lblDisplayTotal.Text = cal.GetDifference(num1, num2).ToString();
+                    cal.RemoveCalculateEvent(cal.GetDifference);
+                    break;
+                case "*":
+                    cal.OnCalculateEvent(cal.GetProduct);
+                    lblDisplayTotal.Text = cal.GetProduct(num1, num2).ToString();
+                    cal.RemoveCalculateEvent(cal.GetProduct);
+                    break;
+                case "/":
+                    cal.OnCalculateEvent(cal.GetQuotient);
+                    lblDisplayTotal.Text = cal.GetQuotient(num1, num2).ToString();
+                    cal.RemoveCalculateEvent(cal.GetQuotient);
+                    break;
+                default:
+                    MessageBox.Show("Please select a valid operator.");
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+}
